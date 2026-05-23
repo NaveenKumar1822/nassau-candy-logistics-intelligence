@@ -1,0 +1,6 @@
+Key Business Insights
+Systemic SLA Deficits: A network efficiency score of 53.50% reveals that nearly half of all shipments fail to meet delivery Service Level Agreements (SLAs). This pervasive underperformance indicates structural bottlenecks in fulfillment rather than isolated carrier delays, posing a significant risk to customer retention and brand trust.
+
+Upstream Data Integrity Flaws: Forensic data cleaning uncovered severe anomalies in source systems, including artificial temporal shifts of up to 1,634 days and orphaned product-factory mapping records. Prior to the implementation of this analytical pipeline, these structural ERP flaws likely obscured true baseline metrics, leaving leadership with compromised operational visibility.
+
+Concentrated Geographic Bottlenecks: Analysis across 196 distinct shipping lanes demonstrates that network volatility is highly localized. Geographic heat mapping reveals concentrated delays in specific routing zones, pointing to suboptimal factory-to-destination assignments and degraded carrier performance in key regional markets.
