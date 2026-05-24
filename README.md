@@ -1,7 +1,3 @@
-Here is your fully updated and polished `README.md` file.
-
-I have replaced the old screenshot section with the three new high-quality dashboard visuals, updated the image paths to point to your new `report/dashboard_screenshots/` folder, and also updated the main directory tree to reflect your recent `01_data` folder rename so everything perfectly matches your GitHub repository!
-
 ---
 
 # Nassau Candy Logistics Intelligence
