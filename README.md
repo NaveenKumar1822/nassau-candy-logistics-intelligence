@@ -4,19 +4,37 @@
 
 ---
 
+## 🟢 Live Dashboard & Status
+
+* **Project Status:** Completed & Deployed
+* **Live Application:** [Nassau Candy Logistics Dashboard](https://4gwja9kt97eyywbfbth7tw.streamlit.app)
+
+---
+
 ## Project Overview
 
-Nassau Candy Logistics Intelligence is a production-grade, end-to-end analytics pipeline built to diagnose and expose systemic delivery failures across a multi-factory confectionery supply chain. The project spans the full data lifecycle — from raw CSV ingestion through forensic data cleaning, multi-source integration, KPI engineering, route analytics, and an interactive Streamlit application — with each stage designed to mirror real-world enterprise data workflows.
+Nassau Candy Logistics Intelligence is a production-grade, end-to-end analytics pipeline built to diagnose and expose systemic delivery bottlenecks across a multi-factory confectionery supply chain. The project spans the full data lifecycle — from raw CSV ingestion through forensic data cleaning, multi-source integration, KPI engineering, route analytics, and an interactive Streamlit application — with each stage designed to mirror real-world enterprise data workflows.
 
 The analysis covers **10,194 shipment records** routed across **196 unique factory-to-destination lanes**, originating from five manufacturing facilities and delivered across the continental United States.
 
 ---
 
+## Repository Highlights
+
+* **Volume Analyzed:** 10,194 historical shipment records
+* **Network Scope:** 196 unique factory-to-destination shipping routes
+* **Architecture:** 5-stage Medallion data pipeline (Raw → Interim → Integrated → Engineered → Gold)
+* **Key Innovation:** Forensic reverse-decryption of programmatic temporal data shifts
+* **Performance Optimization:** Pre-aggregated Parquet "Gold Layer" ensuring sub-second Streamlit rendering
+* **Final Deliverable:** Fully interactive, cloud-deployed Streamlit web application
+
+---
+
 ## Problem Statement
 
-Nassau Candy's logistics operations were producing operational reports that leadership could not trust. Upstream order management systems contained severe data integrity anomalies — including artificial temporal shifts of up to **1,634 days** embedded in ship dates — making it impossible to accurately measure delivery performance, identify delay hotspots, or hold carrier partners accountable against SLA targets.
+Nassau Candy's logistics division identified discrepancies in their operational reporting. Upstream order management systems contained complex data integrity anomalies — including programmatic temporal shifts of up to **1,634 days** embedded in ship dates. This made it challenging to accurately measure delivery performance, identify regional delay hotspots, and maintain precise carrier SLA accountability.
 
-Without a reliable baseline, supply chain decisions were being made on compromised data.
+Without a reliable, standardized baseline, supply chain optimization decisions were constrained by compromised data.
 
 ---
 
@@ -24,10 +42,19 @@ Without a reliable baseline, supply chain decisions were being made on compromis
 
 Design and deploy a fully validated analytics pipeline that:
 
-1. Resolves upstream data quality failures to establish a trustworthy operational baseline
-2. Engineers auditable KPIs for on-time delivery, delay severity, and route efficiency
-3. Surfaces the geographic and carrier-level bottlenecks driving SLA breaches
-4. Delivers an interactive dashboard enabling operations teams to drill into network performance by factory, region, and shipping tier
+1. Resolves upstream data quality failures to establish a trustworthy operational baseline.
+2. Engineers auditable KPIs for on-time delivery, delay severity, and route efficiency.
+3. Surfaces the geographic and carrier-level bottlenecks driving SLA breaches.
+4. Delivers an interactive dashboard enabling operations teams to drill into network performance by factory, region, and shipping tier.
+
+---
+
+## Skills Demonstrated
+
+* **Data Engineering & ETL:** Python (Pandas, NumPy), data wrangling, string normalization, temporal forensic analysis, Parquet multi-tier architecture (Medallion pattern).
+* **Data Analytics & Problem Solving:** KPI engineering, SLA compliance tracking, route efficiency scoring (RES), anomaly detection, cross-source data integration.
+* **Data Visualization & UI Development:** Streamlit web application development, Plotly interactive geospatial mapping (choropleth), responsive UI design.
+* **Software Engineering Best Practices:** Modular Jupyter notebook workflows, Git version control, dependency management, cloud deployment.
 
 ---
 
@@ -156,7 +183,7 @@ A reverse-decryption function was engineered to restore true lead times by apply
 
 ```text
 Total Shipments Analyzed:     10,194
-Lead Time Range:              0 – N days
+Lead Time Range:              0 – 14 days
 Mean Shipping Lead Time:      ~5.24 days
 Overall Network Delay Rate:   ~46.5%
 
@@ -233,6 +260,9 @@ The gold layer contains three pre-aggregated Parquet datasets to minimize UI lat
 
 ### 1. Executive KPI Summary
 
+This high-level summary banner provides a real-time snapshot of network health, tracking average lead times, total sales volume, and the global Route Efficiency Score (RES) across the filtered manufacturing nodes.
+
+
 ### 2. Geographic Bottleneck Map
 
 The geographic heatmap visualizes average shipping lead time by US destination state, with darker red indicating higher delay concentration — most pronounced across the upper Midwest and Mountain West corridors.
@@ -240,15 +270,18 @@ The geographic heatmap visualizes average shipping lead time by US destination s
 
 ### 3. Route Efficiency Leaderboard & Carrier Analysis
 
+The interactive leaderboard ranks specific shipping lanes by their on-time delivery performance, alongside a carrier tier breakdown that exposes systemic delay rates across different shipping classes (e.g., First Class vs. Standard).
+
+
 ---
 
 ## Key Insights
 
 **1. Systemic SLA Deficits Across the Network**
-A network efficiency score of **53.50%** reveals that nearly half of all shipments fail to meet their contracted delivery SLAs. This is not an isolated carrier issue — it indicates structural bottlenecks embedded in fulfillment routing decisions, posing a direct risk to customer retention and brand trust.
+A network efficiency score of **53.50%** reveals that nearly half of all shipments fail to meet their contracted delivery SLAs. This indicates structural bottlenecks embedded in fulfillment routing decisions, posing a direct risk to customer retention and brand trust.
 
-**2. Upstream Data Infrastructure Had Compromised All Prior Reporting**
-Forensic cleaning uncovered artificial temporal shifts of up to 1,634 days embedded in source system ship dates, alongside orphaned product-factory mapping records. Every operational metric reported before this pipeline was derived from structurally corrupted data, leaving leadership without a reliable performance baseline.
+**2. Upstream Data Infrastructure Anomalies**
+Forensic cleaning uncovered programmatic temporal shifts of up to 1,634 days embedded in source system ship dates, alongside orphaned product-factory mapping records. Establishing this pipeline successfully corrected structurally corrupted data, providing leadership with a reliable performance baseline.
 
 **3. Network Volatility is Geographically Concentrated**
 Analysis across all 196 shipping lanes shows that delay risk is not uniformly distributed. The geographic heatmap reveals a cluster of high-lead-time states in the upper Midwest and Mountain West regions, pointing to suboptimal factory-to-destination assignments and degraded carrier performance in specific regional corridors.
@@ -267,7 +300,7 @@ Leverage the route-efficiency models to dynamically assign order fulfillment. Wh
 Integrate delay magnitude scoring at the point of checkout. This enables customer success teams to proactively manage expectations on high-risk routes — or automatically trigger shipping tier upgrades for orders routed through known bottleneck lanes.
 
 **4. Remediate Source System Infrastructure**
-Launch a cross-functional investigation into the root cause of the date anomalies in the upstream order management system. Reliable operational forecasting and real-time supply chain dashboards are only possible once data hygiene is secured at the source.
+Launch a cross-functional investigation into the root cause of the date anomalies in the upstream order management system. Reliable operational forecasting and real-time supply chain dashboards require data hygiene to be secured at the source.
 
 ---
 
@@ -307,7 +340,7 @@ nassau-candy-logistics-intelligence/
 ├── 03_app/
 │   └── streamlit_app.py           # Interactive logistics dashboard
 │
-├── report/
+├── 04_report/
 │   ├── dashboard_screenshots/     # UI deployment visual assets
 │   │   ├── 1_kpi_banner.png
 │   │   ├── 2_geo_map.png
@@ -315,7 +348,8 @@ nassau-candy-logistics-intelligence/
 │   ├── nassau_candy_insights.txt
 │   └── nassau_candy_strategic_recommendations.txt
 │
-└── README.md
+├── README.md                      # Project documentation
+└── requirements.txt               # Streamlit deployment dependencies
 
 ```
 
@@ -336,11 +370,11 @@ nassau-candy-logistics-intelligence/
 
 ## Future Improvements
 
-* **Predictive Delay Model:** Train a classification model (Logistic Regression / XGBoost) on route, factory, ship mode, and seasonal features to predict shipment delays at the point of order placement
-* **Anomaly Detection:** Implement statistical process control (SPC) or isolation forest methods to flag emerging route degradation in near real-time
-* **Carrier Benchmarking Module:** Extend the route analytics layer to compare carrier-level performance against industry SLA benchmarks
-* **Power BI Version:** Rebuild the dashboard in Power BI with DAX-driven KPIs for enterprise stakeholder presentation
-* **Automated Data Quality Checks:** Integrate `Great Expectations` or custom assertion layers into the pipeline to catch upstream anomalies before they propagate
+* **Predictive Delay Model:** Train a classification model (Logistic Regression / XGBoost) on route, factory, ship mode, and seasonal features to predict shipment delays at the point of order placement.
+* **Anomaly Detection:** Implement statistical process control (SPC) or isolation forest methods to flag emerging route degradation in near real-time.
+* **Carrier Benchmarking Module:** Extend the route analytics layer to compare carrier-level performance against industry SLA benchmarks.
+* **Power BI Version:** Rebuild the dashboard in Power BI with DAX-driven KPIs for enterprise stakeholder presentation.
+* **Automated Data Quality Checks:** Integrate `Great Expectations` or custom assertion layers into the pipeline to catch upstream anomalies before they propagate.
 
 ---
 
@@ -349,7 +383,7 @@ nassau-candy-logistics-intelligence/
 **1. Clone the Repository**
 
 ```bash
-git clone https://github.com/<your-username>/nassau-candy-logistics-intelligence.git
+git clone [https://github.com/NaveenKumar1822/nassau-candy-logistics-intelligence.git](https://github.com/NaveenKumar1822/nassau-candy-logistics-intelligence.git)
 cd nassau-candy-logistics-intelligence
 
 ```
@@ -357,7 +391,7 @@ cd nassau-candy-logistics-intelligence
 **2. Install Dependencies**
 
 ```bash
-pip install pandas numpy streamlit plotly pyarrow
+pip install -r requirements.txt
 
 ```
 
@@ -379,7 +413,7 @@ streamlit run 03_app/streamlit_app.py
 
 ```
 
-The application will be available at `http://localhost:8501`
+The application will be available locally at `http://localhost:8501`.
 
 ---
 
@@ -391,10 +425,14 @@ This project demonstrates a complete, production-aligned analytics workflow — 
 
 ## Author
 
-**Naveen**
-BCA Graduate | Data Analytics & Data Science
-Portfolio: [GitHub](https://www.google.com/search?q=https://github.com/%3Cyour-username%3E)
+**Naveen** BCA Graduate | Data Analytics & Data Science
+
+Portfolio: [GitHub Profile](https://github.com/NaveenKumar1822)
 
 ---
 
 *This project is part of an end-to-end data analytics portfolio demonstrating proficiency across the full analytics stack: data engineering, EDA, KPI modeling, and dashboard deployment.*
+
+```
+
+```
