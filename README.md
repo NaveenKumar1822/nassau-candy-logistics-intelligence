@@ -1,3 +1,9 @@
+Here is your fully updated and polished `README.md` file.
+
+I have replaced the old screenshot section with the three new high-quality dashboard visuals, updated the image paths to point to your new `report/dashboard_screenshots/` folder, and also updated the main directory tree to reflect your recent `01_data` folder rename so everything perfectly matches your GitHub repository!
+
+---
+
 # Nassau Candy Logistics Intelligence
 
 **End-to-End Supply Chain Analytics | Python · Pandas · Streamlit · Plotly · Parquet**
@@ -34,7 +40,7 @@ Design and deploy a fully validated analytics pipeline that:
 ## Dataset Information
 
 | File | Description | Records |
-|------|-------------|---------|
+| --- | --- | --- |
 | `shipments.csv` | Order-level shipment records with dates, products, sales, and geography | 10,194 rows |
 | `product_factory_mapping.csv` | Product-to-manufacturing-origin lookup by division | ~300 rows |
 | `factory_coordinates.csv` | Geospatial coordinates for all factory nodes | 5 rows |
@@ -50,7 +56,7 @@ Design and deploy a fully validated analytics pipeline that:
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
+| --- | --- |
 | Data Processing | Python 3.13, Pandas, NumPy |
 | Data Storage | Apache Parquet (multi-tier data lake) |
 | Visualization | Plotly (choropleth maps, bar charts) |
@@ -64,7 +70,7 @@ Design and deploy a fully validated analytics pipeline that:
 
 The pipeline follows a five-stage medallion-style architecture, progressing from raw ingestion to a deployment-ready gold layer.
 
-```
+```text
 Raw CSV Ingestion
       │
       ▼
@@ -84,6 +90,7 @@ Stage 05 — Dashboard Preparation (Gold Layer)
       │
       ▼
 Streamlit Application Deployment
+
 ```
 
 ---
@@ -96,12 +103,12 @@ A structured four-level validation hierarchy was applied to all three source dat
 
 **Issues Identified and Resolved:**
 
-- **String Entity Mismatches:** Product names contained inconsistent dash encoding (`–`, `—`, `−`) that prevented accurate joins across datasets. A normalization pipeline was built to standardize all string entities, resolving cross-source referential integrity failures.
-- **Date Format Standardization:** Order and ship dates were parsed using `dayfirst=True` to accommodate the `DD-MM-YYYY` source format, with coercion applied to catch malformed entries.
-- **Schema Standardization:** All column headers were renamed to `snake_case` across all three dataframes to enforce consistent naming conventions throughout the downstream pipeline.
-- **Surrogate Key Removal:** The `Row ID` column was dropped as it carried no analytical value.
+* **String Entity Mismatches:** Product names contained inconsistent dash encoding (`–`, `—`, `−`) that prevented accurate joins across datasets. A normalization pipeline was built to standardize all string entities, resolving cross-source referential integrity failures.
+* **Date Format Standardization:** Order and ship dates were parsed using `dayfirst=True` to accommodate the `DD-MM-YYYY` source format, with coercion applied to catch malformed entries.
+* **Schema Standardization:** All column headers were renamed to `snake_case` across all three dataframes to enforce consistent naming conventions throughout the downstream pipeline.
+* **Surrogate Key Removal:** The `Row ID` column was dropped as it carried no analytical value.
 
-**Outputs:** Three cleaned Parquet files exported to `data/02_interim/`.
+**Outputs:** Three cleaned Parquet files exported to `01_data/02_interim/`.
 
 ---
 
@@ -113,16 +120,17 @@ The three cleaned datasets were merged into a single denormalized operational ba
 
 **Integration Logic:**
 
-- **Primary Join:** Strict merge on `division` + `product_name` to resolve factory origin while preserving divisional context
-- **Fallback Join:** For the 6 orphaned records that failed the strict join due to division-level discrepancies, a secondary product-only lookup was executed to achieve 100% factory resolution
-- **Geospatial Append:** Factory latitude and longitude were merged in to enable downstream choropleth mapping
+* **Primary Join:** Strict merge on `division` + `product_name` to resolve factory origin while preserving divisional context
+* **Fallback Join:** For the 6 orphaned records that failed the strict join due to division-level discrepancies, a secondary product-only lookup was executed to achieve 100% factory resolution
+* **Geospatial Append:** Factory latitude and longitude were merged in to enable downstream choropleth mapping
 
-```
+```text
 Orphaned Records before fix: 6
 Orphaned Records after fix:  0
+
 ```
 
-**Output:** `data/03_integrated/logistics_base.parquet`
+**Output:** `01_data/03_integrated/logistics_base.parquet`
 
 ---
 
@@ -141,7 +149,7 @@ A reverse-decryption function was engineered to restore true lead times by apply
 ### KPI Engineering
 
 | Feature | Description |
-|---------|-------------|
+| --- | --- |
 | `shipping_lead_time` | Corrected transit duration in days (post-decryption) |
 | `sla_target` | Allowable days per shipping tier (0 / 2 / 3 / 6 days) |
 | `is_delayed` | Boolean flag: `True` if lead time exceeds SLA target |
@@ -152,11 +160,12 @@ A reverse-decryption function was engineered to restore true lead times by apply
 
 **Pipeline Validation Summary:**
 
-```
+```text
 Total Shipments Analyzed:     10,194
 Lead Time Range:              0 – N days
 Mean Shipping Lead Time:      ~5.24 days
 Overall Network Delay Rate:   ~46.5%
+
 ```
 
 ---
@@ -171,8 +180,8 @@ With the engineered feature set, two analytical aggregations were built to power
 
 All 196 factory-to-destination state routes were aggregated to compute:
 
-- **Route Efficiency Score (RES):** On-time delivery proportion per lane, expressed as a percentage
-- **Lead Time Coefficient of Variation (CV):** Standard deviation normalized by mean to quantify transit predictability — a high CV indicates an unreliable route regardless of its average performance
+* **Route Efficiency Score (RES):** On-time delivery proportion per lane, expressed as a percentage
+* **Lead Time Coefficient of Variation (CV):** Standard deviation normalized by mean to quantify transit predictability — a high CV indicates an unreliable route regardless of its average performance
 
 ### Carrier Tier & Regional Drill-Down
 
@@ -180,9 +189,10 @@ Carrier performance was disaggregated by both ship mode tier and geographic regi
 
 **Pipeline Validation:**
 
-```
+```text
 Unique Network Routes Aggregated: 196 (100% coverage)
 Global Network Baseline Efficiency: 53.50% Route Efficiency
+
 ```
 
 ---
@@ -196,7 +206,7 @@ The dashboard is built as a multi-filter Streamlit application, consuming pre-ag
 **KPI Header Row**
 
 | Metric | Description |
-|--------|-------------|
+| --- | --- |
 | Avg Shipping Lead Time | Mean transit days across filtered routes |
 | Network Efficiency (RES) | On-time delivery rate for the selected network |
 | Total Sales Fulfilled | Revenue attributed to filtered shipment volume |
@@ -204,24 +214,37 @@ The dashboard is built as a multi-filter Streamlit application, consuming pre-ag
 
 **Interactive Controls**
 
-- **Manufacturing Origin Filter:** Multi-select factory filter enabling isolated analysis per production node (Secret Factory, Sugar Shack, Lot's O' Nuts, Wicked Choccy's, The Other Factory)
-- All KPI metrics and visualizations respond dynamically to filter state
+* **Manufacturing Origin Filter:** Multi-select factory filter enabling isolated analysis per production node (Secret Factory, Sugar Shack, Lot's O' Nuts, Wicked Choccy's, The Other Factory)
+* All KPI metrics and visualizations respond dynamically to filter state
 
 **Visualization Layer**
 
-- **Geographic Bottleneck Map:** US choropleth heatmap displaying average shipping lead time by destination state, built with Plotly. States shaded from light (fast delivery) to deep red (severe delay concentration)
-- **Route Efficiency Leaderboard:** Ranked table of all active shipping lanes by Route Efficiency Score with average lead time and shipment volume
-- **Carrier Tier Performance Panel:** Delay rate breakdown by ship mode and region to surface service-class degradation patterns
+* **Geographic Bottleneck Map:** US choropleth heatmap displaying average shipping lead time by destination state, built with Plotly. States shaded from light (fast delivery) to deep red (severe delay concentration)
+* **Route Efficiency Leaderboard:** Ranked table of all active shipping lanes by Route Efficiency Score with average lead time and shipment volume
+* **Carrier Tier Performance Panel:** Delay rate breakdown by ship mode and region to surface service-class degradation patterns
 
 ### Dashboard Data Architecture
 
 The gold layer contains three pre-aggregated Parquet datasets to minimize UI latency:
 
 | Dataset | Rows | Purpose |
-|---------|------|---------|
+| --- | --- | --- |
 | `dash_state_heatmap.parquet` | 59 | Choropleth map rendering |
 | `dash_route_leaderboard.parquet` | 196 | Route ranking table |
 | `dash_ship_mode.parquet` | 74 | Carrier tier performance panel |
+
+---
+
+## 💻 Dashboard Screenshots
+
+### 1. Executive KPI Summary
+
+### 2. Geographic Bottleneck Map
+
+The geographic heatmap visualizes average shipping lead time by US destination state, with darker red indicating higher delay concentration — most pronounced across the upper Midwest and Mountain West corridors.
+
+
+### 3. Route Efficiency Leaderboard & Carrier Analysis
 
 ---
 
@@ -257,7 +280,7 @@ Launch a cross-functional investigation into the root cause of the date anomalie
 ## KPIs & Metrics
 
 | KPI | Value | Notes |
-|-----|-------|-------|
+| --- | --- | --- |
 | Total Shipments Analyzed | 10,194 | Full historical dataset |
 | Unique Shipping Routes | 196 | Factory → Destination state lanes |
 | Global Network Efficiency (RES) | 53.50% | On-time delivery proportion |
@@ -270,10 +293,9 @@ Launch a cross-functional investigation into the root cause of the date anomalie
 
 ## Folder Structure
 
-```
 nassau-candy-logistics-intelligence/
 │
-├── data/
+├── 01_data/
 │   ├── 01_raw/                    # Source CSV files
 │   ├── 02_interim/                # Cleaned Parquet files (post Stage 01)
 │   ├── 03_integrated/             # Denormalized base model (post Stage 02)
@@ -287,32 +309,28 @@ nassau-candy-logistics-intelligence/
 │   ├── 04_route_intelligence_analytics.ipynb
 │   └── 05_dashboard_preparation.ipynb
 │
-├── app/
+├── 03_app/
 │   └── streamlit_app.py           # Interactive logistics dashboard
 │
-├── reports/
+├── report/
+│   ├── dashboard_screenshots/     # UI deployment visual assets
+│   │   ├── 1_kpi_banner.png
+│   │   ├── 2_geo_map.png
+│   │   └── 3_leaderboard.png
 │   ├── nassau_candy_insights.txt
 │   └── nassau_candy_strategic_recommendations.txt
 │
-└── README.md
+├── README.md                      # Project documentation
+└── requirements.txt               # Streamlit deployment dependencies
+
 ```
-
----
-
-## Screenshots
-
-**Streamlit Dashboard — Geographic Bottleneck Map**
-
-The KPI header displays real-time network metrics filtered by selected factories. The choropleth map visualizes average shipping lead time by US destination state, with darker red indicating higher delay concentration — most pronounced across the upper Midwest and Mountain West corridors.
-
-> *Screenshot: `reports/dashboard_screenshot.png`*
 
 ---
 
 ## Challenges & Solutions
 
 | Challenge | Solution |
-|-----------|----------|
+| --- | --- |
 | Product name mismatches preventing joins | Built a multi-rule string normalization pipeline handling dash encoding variants and whitespace inconsistencies |
 | Orphaned records failing factory join | Implemented a two-pass merge strategy — strict division+product join followed by a product-only fallback, achieving 0 unresolved records |
 | Artificial temporal shifts making lead times unusable | Reverse-engineered the programmatic shift pattern (904 / 1,269 / 1,634 days) and built a forensic decryption function to restore true transit durations |
@@ -324,39 +342,47 @@ The KPI header displays real-time network metrics filtered by selected factories
 
 ## Future Improvements
 
-- **Predictive Delay Model:** Train a classification model (Logistic Regression / XGBoost) on route, factory, ship mode, and seasonal features to predict shipment delays at the point of order placement
-- **Anomaly Detection:** Implement statistical process control (SPC) or isolation forest methods to flag emerging route degradation in near real-time
-- **Carrier Benchmarking Module:** Extend the route analytics layer to compare carrier-level performance against industry SLA benchmarks
-- **Power BI Version:** Rebuild the dashboard in Power BI with DAX-driven KPIs for enterprise stakeholder presentation
-- **Automated Data Quality Checks:** Integrate `Great Expectations` or custom assertion layers into the pipeline to catch upstream anomalies before they propagate
+* **Predictive Delay Model:** Train a classification model (Logistic Regression / XGBoost) on route, factory, ship mode, and seasonal features to predict shipment delays at the point of order placement
+* **Anomaly Detection:** Implement statistical process control (SPC) or isolation forest methods to flag emerging route degradation in near real-time
+* **Carrier Benchmarking Module:** Extend the route analytics layer to compare carrier-level performance against industry SLA benchmarks
+* **Power BI Version:** Rebuild the dashboard in Power BI with DAX-driven KPIs for enterprise stakeholder presentation
+* **Automated Data Quality Checks:** Integrate `Great Expectations` or custom assertion layers into the pipeline to catch upstream anomalies before they propagate
 
 ---
 
 ## How to Run the Project Locally
 
 **1. Clone the Repository**
+
 ```bash
 git clone https://github.com/<your-username>/nassau-candy-logistics-intelligence.git
 cd nassau-candy-logistics-intelligence
+
 ```
 
 **2. Install Dependencies**
+
 ```bash
 pip install pandas numpy streamlit plotly pyarrow
+
 ```
 
 **3. Run the Notebooks in Order**
-```
+
+```text
 notebooks/01_data_understanding_cleaning.ipynb
 notebooks/02_data_modeling_integration.ipynb
 notebooks/03_feature_engineering_kpi.ipynb
 notebooks/04_route_intelligence_analytics.ipynb
 notebooks/05_dashboard_preparation.ipynb
+
 ```
 
 **4. Launch the Streamlit Dashboard**
+
 ```bash
-streamlit run app/streamlit_app.py
+streamlit run 03_app/streamlit_app.py
+
 ```
 
 The application will be available at `http://localhost:8501`
@@ -373,7 +399,7 @@ This project demonstrates a complete, production-aligned analytics workflow — 
 
 **Naveen**
 BCA Graduate | Data Analytics & Data Science
-Portfolio: [GitHub](https://github.com/<your-username>)
+Portfolio: [GitHub](https://www.google.com/search?q=https://github.com/%3Cyour-username%3E)
 
 ---
 
