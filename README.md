@@ -320,7 +320,6 @@ Launch a cross-functional investigation into the root cause of the date anomalie
 
 ## Folder Structure
 
-```text
 nassau-candy-logistics-intelligence/
 │
 ├── 01_data/
@@ -344,7 +343,8 @@ nassau-candy-logistics-intelligence/
 │   ├── dashboard_screenshots/     # UI deployment visual assets
 │   │   ├── 1_kpi_banner.png
 │   │   ├── 2_geo_map.png
-│   │   └── 3_leaderboard.png
+│   │   ├── 3_leaderboard.png
+│   │   └── full_dashboard.png
 │   ├── nassau_candy_insights.txt
 │   └── nassau_candy_strategic_recommendations.txt
 │
