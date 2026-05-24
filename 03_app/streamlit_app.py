@@ -14,9 +14,9 @@ st.set_page_config(
 @st.cache_data
 def load_dashboard_data():
     # Reading our optimized data structures directly from the Gold Layer
-    heatmap_df = pd.read_parquet('../01_data/05_dashboard/dash_state_heatmap.parquet')
-    leaderboard_df = pd.read_parquet('../01_data/05_dashboard/dash_route_leaderboard.parquet')
-    ship_mode_df = pd.read_parquet('../01_data/05_dashboard/dash_ship_mode.parquet')
+    heatmap_df = pd.read_parquet('01_data/05_dashboard/dash_state_heatmap.parquet')
+    leaderboard_df = pd.read_parquet('01_data/05_dashboard/dash_route_leaderboard.parquet')
+    ship_mode_df = pd.read_parquet('01_data/05_dashboard/dash_ship_mode.parquet')
     return heatmap_df, leaderboard_df, ship_mode_df
 
 raw_heatmap, raw_leaderboard, raw_ship_mode = load_dashboard_data()
