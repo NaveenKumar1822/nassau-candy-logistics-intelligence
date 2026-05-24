@@ -273,39 +273,72 @@ Launch a cross-functional investigation into the root cause of the date anomalie
 ```
 nassau-candy-logistics-intelligence/
 │
-├── data/
-│   ├── 01_raw/                    # Source CSV files
-│   ├── 02_interim/                # Cleaned Parquet files (post Stage 01)
-│   ├── 03_integrated/             # Denormalized base model (post Stage 02)
-│   ├── 04_engineered/             # Feature-rich master dataset + analytics summaries
-│   └── 05_dashboard/              # Gold layer: pre-aggregated dashboard datasets
+├── 01_data/
+│   ├── 01_raw/                              # Original source CSV files
+│   ├── 02_interim/                          # Cleaned parquet datasets
+│   ├── 03_integrated/                       # Integrated logistics base model
+│   ├── 04_engineered/                       # Engineered KPI datasets
+│   └── 05_dashboard/                        # Gold-layer dashboard datasets
 │
-├── notebooks/
+├── 02_notebooks/
 │   ├── 01_data_understanding_cleaning.ipynb
 │   ├── 02_data_modeling_integration.ipynb
 │   ├── 03_feature_engineering_kpi.ipynb
 │   ├── 04_route_intelligence_analytics.ipynb
 │   └── 05_dashboard_preparation.ipynb
 │
-├── app/
-│   └── streamlit_app.py           # Interactive logistics dashboard
+├── 03_app/
+│   └── streamlit_app.py                     # Streamlit logistics dashboard
 │
-├── reports/
-│   ├── nassau_candy_insights.txt
-│   └── nassau_candy_strategic_recommendations.txt
+├── 04_reports/
+│   ├── dashboard_screenshots/
+│   │   ├── 1_kpi_banner.png.png
+│   │   ├── 2_geo_map.png.png
+│   │   ├── 3_leaderboard.png.png
+│   │   └── full_dashboard.png.png
+│   │
+│   ├── nassau_candy_insights.md
+│   └── nassau_candy_strategic_recommendations.md
 │
+├── .gitignore
+├── metric_definitions.md
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## Screenshots
+## Dashboard Screenshots
 
-**Streamlit Dashboard — Geographic Bottleneck Map**
+### Full Dashboard Overview
 
-The KPI header displays real-time network metrics filtered by selected factories. The choropleth map visualizes average shipping lead time by US destination state, with darker red indicating higher delay concentration — most pronounced across the upper Midwest and Mountain West corridors.
+The complete Streamlit dashboard combines KPI monitoring, geographic delay visualization, route efficiency analysis, and carrier performance diagnostics into a single operational intelligence interface.
 
-> *Screenshot: `reports/dashboard_screenshot.png`*
+![Full Dashboard](04_reports/dashboard_screenshots/full_dashboard.png)
+
+---
+
+### KPI Header & Network Summary
+
+The KPI banner provides a high-level operational snapshot of the logistics network, including average lead time, route efficiency, sales fulfilled, and monitored shipping lanes.
+
+![KPI Banner](04_reports/dashboard_screenshots/1_kpi_banner.png)
+
+---
+
+### Geographic Bottleneck Heatmap
+
+An interactive US choropleth map visualizing shipping lead time concentration across destination states. Darker regions indicate higher delivery delays and SLA breach concentration.
+
+![Geographic Heatmap](04_reports/dashboard_screenshots/2_geo_map.png)
+
+---
+
+### Route Efficiency Leaderboard
+
+A ranked operational leaderboard displaying factory-to-destination routes by Route Efficiency Score (RES), shipment volume, and average shipping lead time.
+
+![Leaderboard](04_reports/dashboard_screenshots/3_leaderboard.png)
 
 ---
 
