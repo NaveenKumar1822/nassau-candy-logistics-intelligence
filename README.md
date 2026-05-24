@@ -292,18 +292,18 @@ nassau-candy-logistics-intelligence/
 │
 ├── 04_reports/
 │   ├── dashboard_screenshots/
-│   │   ├── 1_kpi_banner.png.png
-│   │   ├── 2_geo_map.png.png
-│   │   ├── 3_leaderboard.png.png
-│   │   └── full_dashboard.png.png
+│   │   ├── 1_kpi_banner.png
+│   │   ├── 2_geo_map.png
+│   │   ├── 3_leaderboard.png
+│   │   └── full_dashboard.png
 │   │
 │   ├── nassau_candy_insights.md
 │   └── nassau_candy_strategic_recommendations.md
 │
 ├── .gitignore
+├── README.md
 ├── metric_definitions.md
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
