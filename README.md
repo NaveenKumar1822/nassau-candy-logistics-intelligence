@@ -1,5 +1,3 @@
----
-
 # Nassau Candy Logistics Intelligence
 
 **End-to-End Supply Chain Analytics | Python · Pandas · Streamlit · Plotly · Parquet**
