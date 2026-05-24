@@ -289,6 +289,7 @@ Launch a cross-functional investigation into the root cause of the date anomalie
 
 ## Folder Structure
 
+```text
 nassau-candy-logistics-intelligence/
 │
 ├── 01_data/
@@ -316,8 +317,7 @@ nassau-candy-logistics-intelligence/
 │   ├── nassau_candy_insights.txt
 │   └── nassau_candy_strategic_recommendations.txt
 │
-├── README.md                      # Project documentation
-└── requirements.txt               # Streamlit deployment dependencies
+└── README.md
 
 ```
 
